@@ -1,0 +1,54 @@
+type Query {
+  logosByBrandId(brandId: UUID!): [LogoPayload]
+  logoByObjId(brandId: UUID!, _id: UUID!): LogoPayload
+}
+
+type Mutation {
+  encodeLogo(imageFile: String!, fileExt: String!, brandId: UUID!): LogoPayload
+  replaceLogoSpacingObj(brandId: UUID!, _id: UUID!, spacing: LogoSpacingInput!): Success
+}
+
+type LogoPayload {
+  _id: UUID!
+  title: String
+  tags: [String]
+  originalUrl: URL!
+  encodedUrl: URL!
+  encodedSize: EncodedLogoSize
+  spacing: LogoSpacing
+}
+
+type EncodedLogoSize {
+  width: Int
+  height: Int
+  aspectRatio: String
+}
+
+type LogoSpacing {
+  isEditedByUser: Boolean
+  topPercentage: Float
+  bottomPercentage: Float
+  leftPercentage: Float
+  rightPercentage: Float
+  spacingMultiple: Float
+}
+
+input LogoSpacingInput {
+  isEditedByUser: Boolean
+  topPercentage: Float
+  bottomPercentage: Float
+  leftPercentage: Float
+  rightPercentage: Float
+  spacingMultiple: Float
+}
+
+type LogoData {
+  logoId: UUID!
+  brandId: UUID!
+  original: URL
+  encoded: URL
+  createdAt: DateTime
+  updatedAt: DateTime
+  archivedAt: DateTime
+  deletedAt: DateTime
+}

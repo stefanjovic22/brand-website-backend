@@ -1,0 +1,84 @@
+type Query {
+  colorsByBrandId(brandId: UUID!): [ColorPayload]
+}
+
+type Mutation {
+  replaceColorObj(brandId: UUID!, _id: UUID!, colorsObj: JSON): JSON
+  addColor(brandId: UUID!, hex: String!): Success
+  updateSelectedColorMode(brandId: UUID!, _id: UUID!, selectedColorMode: ColorModeEnum): Success
+}
+
+type ColorPayload {
+  _id: String!
+  hex: String!
+  hsl: HslObject
+  hsv: HsvObject
+  hwb: HwbObject
+  lab: LabObject
+  rgb: RgbObject
+  xyz: XyzObject
+  cmyk: CmykObject
+  tags: [String]
+  title: String!
+  selectedColorMode: ColorModeEnum
+}
+
+type HslObject {
+  css: String
+  hue: Int
+  lightness: Int
+  saturation: Int
+}
+
+type HsvObject {
+  css: String
+  hue: Int
+  value: Int
+  saturation: Int
+}
+
+type HwbObject {
+  css: String
+  hue: Int
+  blackness: Int
+  whiteness: Int
+}
+type LabObject {
+  css: String
+  lightness: Int
+  a: Int
+  b: Int
+}
+
+type RgbObject {
+  css: String
+  red: Int
+  blue: Int
+  green: Int
+}
+
+type CmykObject {
+  css: String
+  cyan: Int
+  key: Int
+  yellow: Int
+  magenta: Int
+}
+
+type XyzObject {
+  css: String
+  x: Int
+  y: Int
+  z: Int
+}
+
+enum ColorModeEnum {
+  hex,
+  hsl,
+  hsv,
+  hwb,
+  lab,
+  rgb,
+  xyz,
+  cmyk,
+}

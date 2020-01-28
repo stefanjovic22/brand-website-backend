@@ -1,0 +1,43 @@
+type Query {
+  listBrands: [Brand]
+  getBrandOnboardingStatus(brandId: UUID!): BrandOnboardingStatus
+}
+
+type Mutation {
+  createBrand(values: BrandInput): String
+  updateBrandOnboardingStatus(brandId:  UUID!, values: JSON!): String
+}
+
+type Brand {
+  brandId: UUID!
+  websiteUrl: URL!
+  domainSlug: String
+  brandName: String
+  locale: String
+  hadGuidelines: String
+  isPublished: Boolean
+  createdAt: DateTime
+  updatedAt: DateTime
+  archivedAt: DateTime
+  deletedAt: DateTime
+}
+
+input BrandInput {
+  websiteURL: URL!
+  locale: String
+  hadGuidelines: String
+  isPublished: Boolean
+}
+
+type BrandOnboardingStatus {
+  colors: Status!
+  logos: Status!
+  typography: Status!
+  templates: Status!
+}
+
+enum Status {
+  waiting
+  process
+  finished
+}
